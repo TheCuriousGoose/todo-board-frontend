@@ -3,34 +3,40 @@ import { Model } from "./Model";
 
 export class Task extends Model implements TaskInterface {
 
-    constructor() {
-        super('http://todo-board-backend.test/api/')
-    }
-    
     id: number;
     title: string;
     description: string;
     planned_date: Date;
     completed: boolean;
 
+    constructor(id: number = 0, title: string = '', description: string = '', planned_date: Date = new Date(), completed: boolean = false) {
+        super('http://todo-board-backend.test/api/')
+
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.planned_date = planned_date;
+        this.completed = completed;
+      }
+
     public all() {
         return this.request('GET', 'tasks')
     }
 
-    public async get(id: number) {
-        return await this.request('GET', `tasks/${id}`);
+    public get(id: number) {
+        return this.request('GET', `tasks/${id}`);
     }
 
-    public async create(fields: TaskInterface) {
-        return await this.request('POST', 'tasks', fields);
+    public create(fields: TaskInterface) {
+        return this.request('POST', 'tasks', fields);
     }
 
-    public async update(fields: TaskInterface, id: number) {
-        return await this.request('PUT', `tasks/${id}`, fields);
+    public update(fields: TaskInterface, id: number) {
+        return this.request('PUT', `tasks/${id}`, fields);
     }
 
-    public async delete(id: number) {
-        return await this.request('DESTROY', `tasks/${id}`);
+    public delete(id: number) {
+        return this.request('DELETE', `tasks/${id}`);
     }
 }
 

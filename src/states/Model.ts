@@ -10,16 +10,19 @@ export abstract class Model {
         }
     }
 
-    public async request(method: 'POST' | 'GET' | 'PUT' | 'DESTROY' = 'GET', endpoint: string, body?: any): Promise<any> {
+    public async request(method: 'POST' | 'GET' | 'PUT' | 'DELETE' = 'GET', endpoint: string, body?: any): Promise<any> {
         const url = `${this.baseURL}/${endpoint}`
 
         const response = await fetch(url, {
             method: method,
-            body: body
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(body)
         });
 
         if (!response.ok) {
-            throw new Error('Something went wrong while executing the request');
+            return await response.json();
         }
 
         return await response.json();
