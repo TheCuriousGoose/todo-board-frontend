@@ -10,7 +10,7 @@ export class Task extends Model implements TaskInterface {
     completed: boolean;
 
     constructor(id: number = 0, title: string = '', description: string = '', planned_date: Date = new Date(), completed: boolean = false) {
-        super('http://todo-board-backend.test/api/')
+        super('http://127.0.0.1:8000/api/')
 
         this.id = id;
         this.title = title;

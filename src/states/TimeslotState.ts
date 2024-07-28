@@ -3,7 +3,7 @@ import { Model } from "./Model";
 export class Timeslot extends Model {
 
     constructor() {
-        super('http://todo-board-backend.test/api/')
+        super('http://127.0.0.1:8000/api/')
     }
 
     public all() {
